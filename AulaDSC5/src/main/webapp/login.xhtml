@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>login</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h3>Please Sign In</h3>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="cpf">CPF:</h:outputLabel>
+            <h:inputText id="username" value="#{loginMB.cpf}" required="true"
+                requiredMessage="Please enter your CPF"></h:inputText>
+            <h:outputLabel for="senha">Senha:</h:outputLabel>
+            <h:inputSecret id="password" value="#{loginMB.senha}"
+                required="true" requiredMessage="Please enter Senha"></h:inputSecret>
+            <h:commandButton action="#{loginMB.login}" value="Login"></h:commandButton>
+        </h:panelGrid>
+    </h:form>
+    <br />
+    <br />
+    <h:link value="Criar nova conta:" outcome="usuario" />
+</h:body>
+</html>

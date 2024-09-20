@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Adicionar Usuario</title>
+</h:head>
+
+<h:body>
+	<h:form>
+        <h:outputLabel value="Adicionar Usuario" />
+        <hr />
+
+        <!-- Início da grid -->
+        <div class="ui-fluid formgrid grid">
+            <!-- Primeira coluna da grid -->
+            <div class="ui-g-6">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <h:outputLabel for="nome" value="Nome: " />
+                        <p:inputText id="nome" value="#{usuarioMB.nome}" />
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <h:outputLabel for="idade" value="Idade: " />
+                        <p:inputText id="idade" value="#{usuarioMB.idade}" />
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <h:outputLabel for="cpf" value="CPF: " />
+                        <p:inputText id="cpf" value="#{usuarioMB.cpf}" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segunda coluna da grid -->
+            <div class="ui-g-6">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <h:outputLabel for="rua" value="Rua: " />
+                        <p:inputText id="rua" value="#{usuarioMB.rua}" />
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <h:outputLabel for="numero" value="Número: " />
+                        <p:inputText id="numero" value="#{usuarioMB.numero}" />
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <h:outputLabel for="senha" value="Senha: " />
+                        <p:password id="senha" value="#{usuarioMB.senha}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campo de perfil fora do grid para ocupar a linha completa -->
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <h:outputLabel value="Perfil: " />
+                <p:selectOneRadio value="#{usuarioMB.perfil}" required="true" requiredMessage="Usuario precisa ter perfil" id="niveis">
+                    <f:selectItem itemLabel="Admin" itemValue="admin" />
+                    <f:selectItem itemLabel="User" itemValue="user" />
+                </p:selectOneRadio>
+            </div>
+        </div>
+
+        <!-- Botão de adicionar fora do grid para ocupar a linha completa -->
+        
+        <div class="ui-g">
+            <div class="ui-g-3">
+                <h:commandButton action="#{usuarioMB.cadastrarUsuario}" value="Adicionr" />
+            </div>
+        </div>
+
+    </h:form>
+
+	<h:dataTable value="#{usuarioMB.usuarios}" var="usuario">
+
+		<h:column>
+			<f:facet name="header">Nome</f:facet>    				
+      #{usuario.nome}
+   </h:column>
+
+		<h:column>
+			<f:facet name="header">Idade</f:facet>
+      #{usuario.idade}
+   </h:column>
+
+		<h:column>
+			<f:facet name="header">CPF</f:facet>
+      #{usuario.cpf}
+   </h:column>
+
+		<h:column>
+			<f:facet name="header">Rua</f:facet>
+      #{usuario.endereco.rua}
+   </h:column>
+		<h:column>
+			<f:facet name="header">Numero</f:facet>
+      #{usuario.endereco.numero}
+   </h:column>
+		<h:column>
+			<f:facet name="header">Add Conga</f:facet>
+			<!--  <h:commandButton action="#{usuarioMB.cadastrarConjuge(usuario.cpf)}" value="Add"/>  -->
+			<p:commandButton value="add" type="button" onclick="PF('add').show()">
+				<f:param name="userCPF" value="#{usuario.cpf}" />
+			</p:commandButton>
+		</h:column>
+
+	</h:dataTable>
+
+	<p:dialog header="Header Text" widgetVar="add">
+		<h:form>
+			<h:outputLabel value="Adicionar Usuario" />
+			<hr />
+			<h:outputLabel value="Nome: " />
+			<h:inputText value="#{usuarioMB.nome}"></h:inputText>
+			<br />
+			<h:outputLabel value="Idade: " />
+			<h:inputText value="#{usuarioMB.idade}"></h:inputText>
+			<br />
+			<h:outputLabel value="CPF: " />
+			<h:inputText value="#{usuarioMB.cpf}"></h:inputText>
+			<br />
+
+			<h:commandButton action="#{usuarioMB.cadastrarConjuge()}"
+				value="Adicionar" />
+			<br />
+
+		</h:form>
+	</p:dialog>
+
+</h:body>
+</html>
